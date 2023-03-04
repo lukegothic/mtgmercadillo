@@ -1,0 +1,151 @@
+ROADMAP (backlog.csv)
+Prioridad: menor es más prioridad
+Coste: cada punto son 2h (equivale a 1 día)
+ROI: menor es más ROI
+
+- sincronizar con cardmarket:
+  - orders mkm a eliminar de inventario --> Me permite actualizar mi inventario de manera automática
+  - inventario yo a inventario mkm --> Me permite actualizar cardmarket con mis cartas, precios etc
+- modo pedidos (trade): Me permite abrir la web a 
+- modo lectura (wants)
+- tema proxies, como caracteristica de la carta!!!! (ahora hecho con checkbox pero no puede haber proxis y no proxis... rompe la relacion. hacer como idioma?)
+- poder editar caracteristicas de cada carta (ahora esta cutre, 
+      menos cutre seria poniendo por defecto los valores y que la fila de edicion refleje eso, e inventariar cartas separando idioma, foil, estado, proxy!
+- mover cartas entre carpetas
+- fontawesome e iconos
+- update automatico usando conexion a firebase + events
+- añadir cartas añadidas a coleccion (vamos, manejar la coleccion como estado)
+- diseño bonito
+
+
+
+
+:: doc de diseño ::
+1. descripcion del programa
+  una web (mobile friendly) con las siguientes funcionalidades:
+    - album para enseñar a la gente, con precios de cada carta, que la gente pueda usar para hacer pedidos
+    - de una manera de enseñar similar, poder actualizar el inventario, debe permitir añadir cartas nuevas así como 
+      modificar datos de las existentes (tanto los datos basicos de la carta foil, idioma, estado como donde esta (album, deck, miri), cantidad, cantidad a la venta y precio custom)
+    - poder gestionar pedidos, ver los contenidos que hay que preparar, el destinatario (numero de telefono y nombre) y cambiar el workflow del pedido
+
+2. descripcion de funcionalidades mas especificas
+
+3. como funciona
+  ALBUM
+    - modo solo lectura + crear orders a traves de un php. Me manda un mensaje el que pide con el codigo de pedido y en bd se guarda la order.
+    
+
+  INVENTARIO
+    se muestran todos los articulos, no solo los de trade (aunque si que aparecen organizados por set color rareza etc)
+    mostrar pestañas con los articulos de cada localizacion
+    permite cambiar caracteristicas del articulo: 
+      - datos basicos de la carta foil, idioma, estado 
+      -     permite cambiar la localizacion de un articulo (album, deck, miri, notrade, etc) se podria hacer con drag and drop
+donde esta (album, deck, miri)
+      - cantidad
+      - precio custom
+    en el inventario, se deberian mostrar agrupados y una tablita con los articulos disponibles
+
+    al actualizar carta, en vez de gestionar el cambio de clave, borrando y etc, simplemente reducir la cantidad que haya de la carta pertinente
+    FASE2: proteger con PHP
+
+    en modo inventario la busqueda busca no solo los existentes, sino que también pone nuevos en el album (consulta a scryfall)
+
+  PEDIDOS
+
+
+  ACTUALIZACION DE ARTICULOS (cada Xh) (mm_daemon)
+    1. bloquear la web
+    2. obtener todos los articulos de la tabla
+    3. convertir a objeto carta
+    4. eliminar los que haya cero cantidad
+    5. filtrar scryfall por las id de los articulos
+    6. convertir a objeto ligero
+    7. obtener precios cm
+    8. descargar price guide cardmarket
+    9. añadir prices (normal, foil) a objeto ligero scryfall
+   10. subir fichero
+   // later:
+   11. update cardmarket (items that have been changed or removed)
+   11.1 album => price
+   11.2 rest => remove!!!!!!
+
+::ddbb model::
++tabla con pedidos (los pedidos siempre del album!!! el resto de sitios bloqueados)
+orders
+  order_id
+    articles
+      id
+      quantity
+      price (proteger la accion de hacer pedido con un php o django y cogerlo automaticamente!!!!)
+    shippingMethod
+    status
+    timestamp
+
++tabla con articulos (mi inventario)
+articles
+  donde esta
+    id
+    language
+    condition
+    foil
+      cantidad
+      xxxxxx venta cantidad
+      custom price
+      
++tabla con precios historicos (TODO, fase 3)
+articles_x_prices
+  article_id: [price, date]
+
++diagrama de estados del pedido y de sus cartas:
+- NUEVO: el pedido ha llegado y las cartas se marcan como "reservadas"
+- CANCELADO: el pedido se da de baja y todas las cartas pertenecientes a ese pedido vuelven a aparecer
+- ACEPTADO: el pedido se bloquea y se notifica al usuario de que no puede cancelarlo
+- PREPARADO: pedido preparado para entregar o enviar
+- ENVIADO: pedido enviado y fuera de jurisdiccion
+- RECIBIDO: el pedido se ha entregado y las cartas se deben dar de baja del inventario.
+
+https://console.firebase.google.com/u/0/project/mercadillo-magic/database/mercadillo-magic-default-rtdb/data/~2F
+
+=== FASES ===
+FASE 0: gestion individual
+- poder hacer inventario
+  - CRUD
+  - poder hacer pedidos "fake"
+- modo venta (por defecto) y modo inventario 
+- diferentes colecciones, album (por defecto), digital, all (esto va en la ddbb y en el modo por defecto solo se muestra lo que haya en trade)
+- UI, mobile friendly etc
+- calculo de precios (mm_daemon)
+
+
+
+
+FASE 1: friends and family
+- resumen de pedido
+- pedido por whatsapp
+- crear pedidos de verdad (afectando a ddbb, modo reserva?)
+- pedidos en mano
+- finalizar pedido
+- relistar pedidos no ejecutados
+- pagina de orders
+- optimizar carga
+
+FASE 2: public
+- conversion de proyecto a react y npm
+- base de datos protegida, cuentas de usuario : login con google?
+- pedidos en mano o enviados
+- pipe de actualizacion de precios y generacion de datos
+- mi wishlist + ofrecer intercambios etc.
+- todos los datos en ddbb y no en archivo json
+- pedidos php
+
+FASE 3: auditoria de precios
+- guardar historico de precios
+- alarmas de precios que han cambiado mucho etc
+- ofrecer como servicio!!! endpoints, actualizar precios..., update stock mkm... etc
+
+
+
+otros addons:
+- salt score
+- https://storage.googleapis.com/topdekt-user/salt/salt_distribution.json

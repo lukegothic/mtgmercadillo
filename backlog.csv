@@ -1,0 +1,23 @@
+Num,Nombre,Descripcion,Me permite...,Fase,Prioridad,Coste,ROI,Hecho?
+1,sincronizar con mkm - orders a inventario,"Obtiene las ultimas orders de mkm y actualiza inventario en consecuencia, a priori, debe presentar una interfaz de usuario para decidir que hacer con cada order y que cada eleccion se quede reflejada en la bbdd: Sincronizar (borra articulos contenidos en el order), Ignorar. Cualquier order que tenga una seleccion no se muestra en subsiguientes consultas. Debe acomodar ""sources"" mkm, web, mano",Me evita tener que eliminar productos del inventario que me compran a mano,alpha,3,2,6,
+2,sicronizar con mkm - inventario a tienda,"Sincroniza productos inventario con productos tienda, lo ideal es ir edicion a edicion buscando discrepancias, tener una interfaz que muestre un resumen de los cambios (inserts, updates, deletes, errores) y un boton de aplicar cambios, iria edicion a edicion si o si","Me evita tener que mantener dos inventarios activos, me permite manejar toda la info desde mi inventario",alpha,1,4,4,
+3,modo album o pedido,"Basicamente lo que tenia antes, mostrar album, precios, un boton que muestre el resumen y un boton de hacer pedido. ",Lo mismo que descripcion,alpha,2,3,6,
+7,modo inventario - edicion con caracteristicas,"o bien fila de edicion interactuable o bien algo general que pone solo una fila, ahora hay X filas","Permitir añadir articulos en cualquier condicion, idioma, foil",alpha,1,2,2,x
+8,"modo inventario - lo que se añada que se guarde en sesion, tanto scryfalldb como actualizar coleccion con lo que se añada",añadir actualizaciones a collection y a scryfalldb,Evita erroers inventariando,alpha,1,2,2,x
+9,"en todos los modos, paginacion",son muchisimas cartas asi que habria que implementar paginacion,permite navegacion fluida en la web,alpha,1,3,3,
+10,fontawesome,iconos,iconos,alpha,2,1,2,x
+13,varias paginas (router),"index=trade, pero tiene que haber rutas para el resto y protegidas con auth. orders, inventario",basicamente tener una pagina unica y multiples funcioanldiades,alpha,1,2,2,x
+16,"publicar json datos en firebase o similar, añadir entrada cuando añada carta a inventario","permite añadir filas scryfall_db en vez de depender de mm_daemon para todo, cambiar también daem,on para que solo actualice precios","permite tener datos scryfall actualizados en la ddbb sin tener que correr el proceso ",alpha,2,2,4,
+22,pipeline de publicar la solucion,crear script que publique la web en el servidor,acceder desde cualquier sitio a la web,alpha,1,2,2,x
+6,modo inventario - proxies,añadir proxi como idioma o bien proxi como caracteristica... la verdad es que rompe si se pone como caracteristiica...,Me permite ver que tengo y que no en vez de hacer a mano mil veces y hacer el pedido a proxymarket,beta,2,1,2,
+12,diseño bonito,modo movil para album y etc,mostrar cartas bien,beta,2,4,8,
+14,auth,auth con google y cuentas de usuario e invitaciones (con correo y movil suficiente),vincular pedidos a personas y concatactar con ellas en caso de problema,beta,2,3,6,
+4,modo wants,"Es un modo album pero en vez de boton comprar, un boton de ""lo tengo"" y que me pueda enviar un mensaje a whatsapp","Me permite completar las barajas que necesitan el stamp, basicamente",gamma,3,1,3,
+5,modo inventario - carpetas,"permitir mover articulos de una carpeta a otra, con drag and drop o similar. Ahora se puede borrando y eliminando","Cuando paso a utilizar una carta del inventario en un deck, dejo una carta, paso una carta a specs... etc",gamma,3,1,3,
+11,cliente conectado firebase para actualizar inventario,"reflejar automaticamente cambios en ddbb en las interfaces ",evita errores de inventario,gamma,3,3,9,
+15,publicar mm_daemon,que ionos corra el python cada X horas,"permitir que corra cada X horas, no tengo que lanzarlo a mano",gamma,3,3,9,
+17,proteger endpoints de acceso a db,"php o python que recibe las llamadas y necesitas estar autorizado: manejar orders, inventario",NO PERDER LA DDBB,gamma,1,5,5,
+18,flujo completo de trabajo de orders en web,"hacer pedidos de verdad, no solo en mano sino enviar tambien, estados de order (mirar .txt)",,gamma,,,,
+19,historico de precios de cartas,,,omega,,,,
+20,alarmas de precios que cambien,,,omega,,,,
+21,cambiar a producto,,,omega,,,,

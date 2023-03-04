@@ -1,0 +1,30 @@
+.folder-selector {
+    display: flex;
+    width: 100%;
+    position: fixed;
+    background-color: #fff;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    z-index: 100;
+    box-shadow: 0 1px 5px #ccc;
+}
+.folder-selector .folder {
+    flex-grow: 1;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: 10px;
+    color: #929daf;
+    font-weight: bold;
+    transition: all 250ms ease-in-out;
+    font-size: 0.9em;
+}
+.folder-selector .folder:hover {
+    color:#428BFF;
+}
+.folder-selector .folder.selected {
+    color:#428BFF;
+    background-color: rgba(0, 0, 0, 0.08);
+    font-size: 1em;
+}
