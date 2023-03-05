@@ -4,7 +4,7 @@ import Card from "./Card";
 import CardSell from "./CardSell";
 const PAGE_ITEMS = 60;
 // TODO: multiples albunes? modern legacy edh foil, custom search... etc.
-const AlbumSell = ({ collection, filters }) => {
+const AlbumSell = ({ collection, filter }) => {
     // TODO: paginacion smart: colores y nombre?
     const [page, setPage] = useState(1);
     // TODO: forma inteligente de separar? foils por un lado etc etc
@@ -14,9 +14,9 @@ const AlbumSell = ({ collection, filters }) => {
         window.scrollTo(0, 0);
     }, [page]);
     useEffect(() => {
-        setFilteredArticles(articles.filter(card => !filters || !filters.name || (filters.name.toLowerCase() && card.name.toLowerCase().indexOf(filters.name) !== -1)));
+        setFilteredArticles(articles.filter(card => !filter || (filter.toLowerCase() && card.name.toLowerCase().indexOf(filter) !== -1)));
         setPage(1);
-    }, [filters]);
+    }, [filter]);
     return <>
         <div className={`album album-sell`}>
         { filteredArticles

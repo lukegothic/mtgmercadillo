@@ -4,10 +4,10 @@ import Card from "./Card";
 import CardSell from "./CardSell";
 import CardInventory from './CardInventory';
 import AlbumType from 'ui/_functions/AlbumType';
+import { useUpdateEffect } from 'react-use';
 
 // TODO: multiples albunes? modern legacy edh foil, custom search... etc.
-const Album = ({ collection, filters, type = AlbumType.SELL }) => {
-    console.log(collection, filters, type);
+const Album = ({ collection, filter, type = AlbumType.SELL }) => {
     const PAGE_ITEMS = type === AlbumType.SELL ? 60 : 180;
     // TODO: paginacion smart: colores y nombre? sets?
     const [page, setPage] = useState(1);
@@ -20,10 +20,11 @@ const Album = ({ collection, filters, type = AlbumType.SELL }) => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [page]);
-    useEffect(() => {
-        setFilteredCollection(collection.filter(card => !filters || !filters.name || (filters.name.toLowerCase() && card.name.toLowerCase().indexOf(filters.name) !== -1)));
+    useUpdateEffect(() => {
+        console.log("chambia filtro de ", type);
+        setFilteredCollection(collection.filter(card => !filter || (filter.toLowerCase() && card.name.toLowerCase().indexOf(filter) !== -1)));
         setPage(1);
-    }, [filters]);  // BUG: si dependo de colleciton hace pintados infinitos en SellPage pero necesito escucharla...
+    }, [filter]);  // BUG: si dependo de colleciton hace pintados infinitos en SellPage pero necesito escucharla...
     return <>
         <div className={`album album-${type}`}>
         { filteredCollection

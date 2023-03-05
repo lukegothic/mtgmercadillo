@@ -4,7 +4,7 @@ import Card from "./Card";
 import CardInventory from "./CardInventory";
 // TODO: Merge AlbumSell y AlbumInve
 const PAGE_ITEMS = 180;
-const AlbumInventory = ({ collection, filters, type="inventory" }) => {
+const AlbumInventory = ({ collection, filter, type="inventory" }) => {
     // TODO: paginacion, en este caso por set
     // TODO: paginacion smart: colores y nombre?
     const [page, setPage] = useState(1);
@@ -14,9 +14,9 @@ const AlbumInventory = ({ collection, filters, type="inventory" }) => {
         window.scrollTo(0, 0);
     }, [page]);
     useEffect(() => {
-        setFilteredCollection(collection.filter(card => !filters || !filters.name || (filters.name.toLowerCase() && card.name.toLowerCase().indexOf(filters.name) !== -1)));
+        setFilteredCollection(collection.filter(card => !filter (filter.toLowerCase() && card.name.toLowerCase().indexOf(filter) !== -1)));
         setPage(1);
-    }, [filters, collection]);
+    }, [filter, collection]);
     return (<><div className={`album album-${type}`}>
         { filteredCollection
             .slice((page - 1) * PAGE_ITEMS, (page - 1) * PAGE_ITEMS + PAGE_ITEMS)

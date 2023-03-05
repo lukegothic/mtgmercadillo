@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 const CardSell = ({ card, article }) => {
-    const price = card.prices[article.foil ? 1 : 0];
+    const price = card.prices[article.foil ? "eur_foil" : "eur"];
     const whole = parseInt(price);
     const remainder = price - whole;
     return (<div className="article-shop-holder">

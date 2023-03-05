@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useUpdateEffect } from 'react-use';
 
-export default ({ filters, setFilters }) => {
+const Filters = ({ filter, setFilter }) => {
     const [searchTimeout, setSearchTimeout] = useState(null);
     const [selectTimeout, setSelectTimeout] = useState(null);
     const [lastSearch, setLastSearch] = useState(null);
@@ -21,12 +22,14 @@ export default ({ filters, setFilters }) => {
         searchTimeout && clearTimeout(searchTimeout);
         selectTimeout && clearTimeout(selectTimeout);
         const name = value.length > 2 ? value : null;
-        setSearchTimeout(setTimeout(() => setFilters({ ...filters, name }), 500));
+        setSearchTimeout(setTimeout(() => setFilter(name), 500));
         setSelectTimeout(setTimeout(() => SearchInput.current.select(), 2500));
         setLastSearch(name);
     }
-    useEffect(() => window.addEventListener("keydown", HandleKeydown), []);
+    useUpdateEffect(() => window.addEventListener("keydown", HandleKeydown));
     return <div className="filters">
         <input ref={SearchInput} type="search" name="searchString" placeholder="Busca cartas..." autoComplete="off" onInput={e => HandleInput(e.target.value)} />
     </div>;
 }
+
+export default Filters;

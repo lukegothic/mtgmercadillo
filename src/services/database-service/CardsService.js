@@ -45,7 +45,7 @@ export const getCards = async (collection) => {
         ...card,
         ...ScryfallDB[card.id in ScryfallDB ? card.id : undefined]
     }));
-    console.log(cards_x_scryfall);
+    // console.log(cards_x_scryfall);
     return cards_x_scryfall;
 }
 export const insertArticle = async ({ folder, card, article }) => {

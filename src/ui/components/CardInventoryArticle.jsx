@@ -21,7 +21,7 @@ const CardInventoryArticle = ({ card, article }) => {
         <i className={`icon flag-${article.language}`} />
         <span className={`badge condition condition-${article.condition}`}>{article.condition}</span>
         <i className={`icon foil-${article.foil ? 1 : 0}`} />
-        <input type="number" className='article-customprice-edit small' min={0.49} step={0.5} defaultValue={article.customprice || ""} placeholder={(Array.isArray(card.prices) ? card.prices[article.foil ? 1 : 0] : card.prices[article.foil ? "eur_foil" : "eur"])} onBlur={HandleChangePrice}></input>
+        <input type="number" className='article-customprice-edit small' min={0.49} step={0.5} defaultValue={article.customprice || ""} placeholder={card.prices[article.foil ? "eur_foil" : "eur"]} onBlur={HandleChangePrice}></input>
     </div>;
 }
 export default CardInventoryArticle;

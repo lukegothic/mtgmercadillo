@@ -2,7 +2,7 @@ const UndefinedDatabaseEntry = {
     "oracle_id":"00000000-0000-0000-0000-000000000000",
     "name":"Updating data...",
     "released_at":"3000-12-12",
-    "image_uris":"6/1/616a3755-f08c-4b8f-954b-7e3f3a8fa71f.jpg?1583965480",
+    "image_uris": { "small": "https://cards.scryfall.io/small/front/6/1/616a3755-f08c-4b8f-954b-7e3f3a8fa71f.jpg?1583965480"},
     "mana_cost":"{4}{W}{W}",
     "cmc":20,
     "type_line":"Sorcery",
@@ -17,7 +17,7 @@ const UndefinedDatabaseEntry = {
     "rarity":"mythic",
     "frame":"2003",
     "edhrec_rank":99999,
-    "prices":[999.99,999.99]
+    "prices": { "eur": 999.99, "eur_foil": 999.99 }
 }
 export const getCompactScryfallDatabase = async () => {
     console.log("requesting scryfall db");

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Folders from '../_functions/Folders';
 import './FolderSelector.css';
 
-export default () => {
+const FolderSelector = () => {
     const { folder, setFolder } = useContext(FolderContext);
     return <div className="folder-selector">
         {Folders.map(f => <div className={`folder ${f.id===folder ? "selected": ""}`} key={f.id} title={f.description} onClick={() => f.id !== folder && setFolder(f.id)}>
@@ -13,3 +13,5 @@ export default () => {
         )}
     </div>;
 }
+
+export default FolderSelector;

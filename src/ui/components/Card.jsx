@@ -1,8 +1,8 @@
 import { sortArticles } from "../_functions/Article";
 
-export default ({ card, article, children }) => {
+const Card = ({ card, article, children }) => {
     card.articles.sort(sortArticles);
-    const img_src = typeof card.image_uris === "string" ? `https://c1.scryfall.com/file/scryfall-cards/small/front/${card.image_uris}` : ("image_uris" in card ? card.image_uris.small : card.card_faces[0].image_uris.small);
+    const img_src = "image_uris" in card ? card.image_uris.small : card.card_faces[0].image_uris.small;
     return <div className={`article`}>
         <div className="article-image-holder">
             <img className="article-image" loading="lazy" alt={card.name} src={img_src}></img>
@@ -13,3 +13,5 @@ export default ({ card, article, children }) => {
         </div>
     </div>;
 }
+
+export default Card; 

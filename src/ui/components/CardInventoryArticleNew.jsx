@@ -49,7 +49,7 @@ const CardInventoryArticleNew = ({ card }) => {
             <i className={`icon flag flag-${articleNew.language}`} onClick={HandleLanguageChange} />
             <span className={`badge condition condition-${articleNew.condition}`} onClick={HandleConditionChange}>{articleNew.condition}</span>
             <i className={`icon foil foil-${articleNew.foil ? 1 : 0}`} onClick={HandleFoilChange} />
-            <input ref={custompriceInput} type="number" className='article-customprice-edit small' min={0.49} step={0.5} defaultValue={""} placeholder={(Array.isArray(card.prices) ? card.prices[articleNew.foil ? 1 : 0] : card.prices[articleNew.foil ? "eur_foil" : "eur"])}></input>
+            <input ref={custompriceInput} type="number" className='article-customprice-edit small' min={0.49} step={0.5} defaultValue={""} placeholder={card.prices[articleNew.foil ? "eur_foil" : "eur"]}></input>
             <button type="submit"><FontAwesomeIcon icon={faSave} /></button>
         </div>
     </form>
