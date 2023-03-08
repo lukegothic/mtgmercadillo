@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useRef } from 'react';
 import { useEffectOnce, useUpdateEffect } from 'react-use';
 import { getCards } from 'services/database-service/CardsService';
 import { searchScryfall  } from 'services/scryfall-service/ScryfallService';
@@ -69,17 +69,17 @@ const InventoryPage = () => {
   useUpdateEffect(() => {
   }, [fakeCollection]);
 
-    return (
-      <CollectionContext.Provider value={{ collection, collectionDispatcher }}>
-        <FolderContext.Provider value={{ folder, setFolder }}>
-          <InventoryArticleNewContext.Provider value={{ articleNew, setArticleNew }}>
-            <FolderSelector />
-            { collection ? <Album collection={collection} folder={folder} filter={filter} type={AlbumType.INVENTORY} /> : <img src={logoanim} alt="logo"></img>}
-            { fakeCollection && fakeCollection.length > 0 && <AlbumFake collection={fakeCollection}></AlbumFake> }
-            <Filters filter={filter} setFilter={setFilter} />
-          </InventoryArticleNewContext.Provider>
-        </FolderContext.Provider>
-      </CollectionContext.Provider>
-    );
+  return (
+    <CollectionContext.Provider value={{ collection, collectionDispatcher }}>
+      <FolderContext.Provider value={{ folder, setFolder }}>
+        <InventoryArticleNewContext.Provider value={{ articleNew, setArticleNew }}>
+          <FolderSelector />
+          { collection ? <Album collection={collection} folder={folder} filter={filter} type={AlbumType.INVENTORY} /> : <img src={logoanim} alt="logo"></img>}
+          { fakeCollection && fakeCollection.length > 0 && <AlbumFake collection={fakeCollection}></AlbumFake> }
+          <Filters filter={filter} setFilter={setFilter} />
+        </InventoryArticleNewContext.Provider>
+      </FolderContext.Provider>
+    </CollectionContext.Provider>
+  );
 }
 export default InventoryPage;
