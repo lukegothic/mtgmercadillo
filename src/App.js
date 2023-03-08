@@ -13,9 +13,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<SellPage />}></Route>
-        <Route path="/i" element={<InventoryPage />}></Route>
-        <Route path="/o" element={<OrdersPage />}></Route>
+        <Route exact path="/" element={<InventoryPage />}></Route>
+        <Route path="/sell" element={<SellPage />}></Route>
+        <Route path="/inventory" element={<InventoryPage />}></Route>
+        <Route path="/orders" element={<OrdersPage />}></Route>
         <Route path="*" element={<NotFoundPage />}/>
       </Routes>
     </Router>

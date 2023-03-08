@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import AlbumPaginator from './AlbumPaginator';
 import Card from "./Card";
 import CardSell from "./CardSell";
@@ -17,6 +17,7 @@ const Album = ({ collection, filter, type = AlbumType.SELL }) => {
         collection = collection.reduce((acc, i) => acc.concat(i.articles.filter(a => a.quantity > 0).map(a => ({ ...i, article: a }))), []);
     }
     const [filteredCollection, setFilteredCollection] = useState(collection);
+    const album = useRef();
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [page]);
@@ -36,7 +37,8 @@ const Album = ({ collection, filter, type = AlbumType.SELL }) => {
         }
     }, [filter]);  // BUG: si dependo de colleciton hace pintados infinitos en SellPage pero necesito escucharla...
     return <>
-        <div className={`album album-${type}`}>
+        <button style={{position:"fixed", top: 80, right: 0, zIndex: 100}} onClick={() => album.current.scrollIntoView()}>Inventory</button>
+        <div ref={album} className={`album album-${type}`}>
         { filteredCollection
             .slice((page - 1) * PAGE_ITEMS, (page - 1) * PAGE_ITEMS + PAGE_ITEMS)
             .map((card, i) => <Card key={i} card={card} article={card.article}>
